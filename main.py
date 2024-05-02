@@ -23,39 +23,60 @@ def sort(file):
     root, ext = os.path.splitext(file)
     if ext in image:
         move_path = os.path.join(current_dir,'Images', file)
-        shutil.move(file,move_path)
-        logging.info(f"Moved '{file}' to Images folder")
-        sorted_files.append(file)
+        try:
+            shutil.move(file,move_path)
+            logging.info(f"Moved '{file}' to Images folder")
+            sorted_files.append(file)
+        except Exception as e:
+            logging.error(f"Error while moving file '{file}': {e}")
     elif ext in document:
         move_path = os.path.join(current_dir,'Documents', file)
-        shutil.move(file,move_path)
-        logging.info(f"Moved '{file}' to Documents folder")
-        sorted_files.append(file)
+        try:
+            shutil.move(file,move_path)
+            logging.info(f"Moved '{file}' to Documents folder")
+            sorted_files.append(file)
+        except Exception as e:
+            logging.error(f"Error while moving file '{file}': {e}")
     elif ext in video:
         move_path = os.path.join(current_dir,'Videos', file)
-        shutil.move(file,move_path)
-        logging.info(f"Moved '{file}' to Videos folder")
-        sorted_files.append(file)
+        try:
+            shutil.move(file,move_path)
+            logging.info(f"Moved '{file}' to Videos folder")
+            sorted_files.append(file)
+        except Exception as e:
+            logging.error(f"Error while moving file '{file}': {e}")
     elif ext in audio:
         move_path = os.path.join(current_dir,'Audios', file)
-        shutil.move(file,move_path)
-        logging.info(f"Moved '{file}' to Audios folder")
-        sorted_files.append(file)
+        try:
+            shutil.move(file,move_path)
+            logging.info(f"Moved '{file}' to Audios folder")
+            sorted_files.append(file)
+        except Exception as e:
+            logging.error(f"Error while moving file '{file}': {e}")
     elif ext in archive:
         move_path = os.path.join(current_dir,'Archives', file)
-        shutil.move(file,move_path)
-        logging.info(f"Moved '{file}' to Archives folder")
-        sorted_files.append(file)
+        try:
+            shutil.move(file,move_path)
+            logging.info(f"Moved '{file}' to Archives folder")
+            sorted_files.append(file)
+        except Exception as e:
+            logging.error(f"Error while moving file '{file}': {e}")
     elif ext in executable:
         move_path = os.path.join(current_dir,'Executables', file)
-        shutil.move(file,move_path)
-        logging.info(f"Moved '{file}' to Executables folder")
-        sorted_files.append(file)
+        try:
+            shutil.move(file,move_path)
+            logging.info(f"Moved '{file}' to Executables folder")
+            sorted_files.append(file)
+        except Exception as e:
+            logging.error(f"Error while moving file '{file}': {e}")
     elif ext in PDF:
         move_path = os.path.join(current_dir,'PDFs', file)
-        shutil.move(file,move_path)
-        logging.info(f"Moved '{file}' to PDFs folder")
-        sorted_files.append(file)
+        try:
+            shutil.move(file,move_path)
+            logging.info(f"Moved '{file}' to PDFs folder")
+            sorted_files.append(file)
+        except Exception as e:
+            logging.error(f"Error while moving file '{file}': {e}")
     else:
         unsorted_files.append(file)
 
@@ -94,6 +115,7 @@ def main():
         logger.info(f'Fetched files: {files}')
     else:
         logger.info(f'No files found in the directory')
+        exit()
     
     for file in files:
         sort(file)
