@@ -19,6 +19,9 @@ files = []
 sorted_files = []
 unsorted_files = []
 
+
+# for future me: Find a way to do this more compact, indead of bunch of if n elif statements.
+
 def sort(file):
     root, ext = os.path.splitext(file)
     if ext in image:
