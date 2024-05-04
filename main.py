@@ -2,86 +2,38 @@ import os
 import shutil
 import logging
 from sys import exit
-
+import time
 current_dir = os.getcwd()
 
 folders = ['Documents', 'Audios', 'Videos', 'PDFs', 'Executables', 'Images', 'Archives']
 
-document = [".doc", ".docx", ".odt", ".txt", ".rtf", ".xls", ".xlsx", ".csv", ".ppt", ".pptx"]
-image = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".tif", ".psd", ".ai", ".jfif"]
-video = [".mp4", ".avi", ".mov", ".wmv", ".mkv"]
-audio = [".mp3", ".wav", ".aac", ".flac", ".ogg"]
-archive = [".zip", ".rar", ".7z", ".tar", ".gzip"]
-executable = [".exe", ".dmg", ".apk"]
-PDF = ['.pdf']
+file_ext = {'.doc': 'Documents', '.docx': 'Documents', '.odt': 'Documents', '.txt': 'Documents', '.rtf': 'Documents', '.xls': 'Documents', '.xlsx': 'Documents', '.csv': 'Documents', '.ppt': 'Documents', '.pptx': 'Documents',
+            '.mp3': 'Audios', '.wav': 'Audios', '.aac': 'Audios', '.flac': 'Audios', '.ogg': 'Audios',
+            '.mp4': 'Videos', '.avi': 'Videos', '.mov': 'Videos', '.wmv': 'Videos', '.mkv': 'Videos',
+            '.pdf': 'PDFs',
+            '.exe': 'Executables', '.dmg': 'Executables', '.apk': 'Executables',
+            '.jpg': 'Images', '.jpeg': 'Images', '.png': 'Images', '.gif': 'Images', '.bmp': 'Images', '.tiff': 'Images', '.tif': 'Images', '.psd': 'Images', '.ai': 'Images', '.jfif': 'Images',
+            '.zip': 'Archives', '.rar': 'Archives', '.7z': 'Archives', '.tar': 'Archives', '.gzip': 'Archives'}
+
 
 files = []
 sorted_files = []
 unsorted_files = []
 
-
-# for future me: Find a way to do this more compact, indead of bunch of if n elif statements.
-
 def sort(file):
-    root, ext = os.path.splitext(file)
-    if ext in image:
-        move_path = os.path.join(current_dir,'Images', file)
-        try:
-            shutil.move(file,move_path)
-            logging.info(f"Moved '{file}' to Images folder")
-            sorted_files.append(file)
-        except Exception as e:
-            logging.error(f"Error while moving file '{file}': {e}")
-    elif ext in document:
-        move_path = os.path.join(current_dir,'Documents', file)
-        try:
-            shutil.move(file,move_path)
-            logging.info(f"Moved '{file}' to Documents folder")
-            sorted_files.append(file)
-        except Exception as e:
-            logging.error(f"Error while moving file '{file}': {e}")
-    elif ext in video:
-        move_path = os.path.join(current_dir,'Videos', file)
-        try:
-            shutil.move(file,move_path)
-            logging.info(f"Moved '{file}' to Videos folder")
-            sorted_files.append(file)
-        except Exception as e:
-            logging.error(f"Error while moving file '{file}': {e}")
-    elif ext in audio:
-        move_path = os.path.join(current_dir,'Audios', file)
-        try:
-            shutil.move(file,move_path)
-            logging.info(f"Moved '{file}' to Audios folder")
-            sorted_files.append(file)
-        except Exception as e:
-            logging.error(f"Error while moving file '{file}': {e}")
-    elif ext in archive:
-        move_path = os.path.join(current_dir,'Archives', file)
-        try:
-            shutil.move(file,move_path)
-            logging.info(f"Moved '{file}' to Archives folder")
-            sorted_files.append(file)
-        except Exception as e:
-            logging.error(f"Error while moving file '{file}': {e}")
-    elif ext in executable:
-        move_path = os.path.join(current_dir,'Executables', file)
-        try:
-            shutil.move(file,move_path)
-            logging.info(f"Moved '{file}' to Executables folder")
-            sorted_files.append(file)
-        except Exception as e:
-            logging.error(f"Error while moving file '{file}': {e}")
-    elif ext in PDF:
-        move_path = os.path.join(current_dir,'PDFs', file)
-        try:
-            shutil.move(file,move_path)
-            logging.info(f"Moved '{file}' to PDFs folder")
-            sorted_files.append(file)
-        except Exception as e:
-            logging.error(f"Error while moving file '{file}': {e}")
-    else:
+    root, ext = os.path.splittext(file)
+    path = file_ext.get(ext, 'Unknown')
+
+    if path == 'Unknown':
         unsorted_files.append(file)
+    else:
+        move_path = os.path.join(current_dir, path, file)
+        try:
+            shutil.move(file,move_path)
+            logging.info(f"Moved file f'{file}' to {path} folder")
+            sorted_files.append(file)
+        except Exception as e:
+            logging.error(f"Error while moving file '{file}': {e}")
 
 def folder_setup(folder_name):
     folder_path = os.path.join(current_dir, folder_name)
