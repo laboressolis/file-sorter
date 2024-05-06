@@ -5,7 +5,7 @@ from sys import exit
 import time
 current_dir = os.getcwd()
 
-folders = ['Documents', 'Audios', 'Videos', 'PDFs', 'Executables', 'Images', 'Archives']
+folders = ['Documents', 'Audios', 'Videos', 'PDFs', 'Executables', 'Images', 'Archives', 'JARs']
 
 file_ext = {'.doc': 'Documents', '.docx': 'Documents', '.odt': 'Documents', '.txt': 'Documents', '.rtf': 'Documents', '.xls': 'Documents', '.xlsx': 'Documents', '.csv': 'Documents', '.ppt': 'Documents', '.pptx': 'Documents',
             '.mp3': 'Audios', '.wav': 'Audios', '.aac': 'Audios', '.flac': 'Audios', '.ogg': 'Audios',
@@ -13,8 +13,8 @@ file_ext = {'.doc': 'Documents', '.docx': 'Documents', '.odt': 'Documents', '.tx
             '.pdf': 'PDFs',
             '.exe': 'Executables', '.dmg': 'Executables', '.apk': 'Executables',
             '.jpg': 'Images', '.jpeg': 'Images', '.png': 'Images', '.gif': 'Images', '.bmp': 'Images', '.tiff': 'Images', '.tif': 'Images', '.psd': 'Images', '.ai': 'Images', '.jfif': 'Images',
-            '.zip': 'Archives', '.rar': 'Archives', '.7z': 'Archives', '.tar': 'Archives', '.gzip': 'Archives'}
-
+            '.zip': 'Archives', '.rar': 'Archives', '.7z': 'Archives', '.tar': 'Archives', '.gzip': 'Archives',
+            '.jar': 'JARs'}
 
 files = []
 sorted_files = []
@@ -30,7 +30,7 @@ def sort(file):
         move_path = os.path.join(current_dir, path, file)
         try:
             shutil.move(file,move_path)
-            logging.info(f"Moved file f'{file}' to {path} folder")
+            logging.info(f"Moved file '{file}' to {path} folder")
             sorted_files.append(file)
         except Exception as e:
             logging.error(f"Error while moving file '{file}': {e}")
