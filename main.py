@@ -30,10 +30,10 @@ def sort(file):
         move_path = os.path.join(current_dir, path, file)
         try:
             shutil.move(file,move_path)
-            logging.info(f"Moved file '{file}' to {path} folder")
+            logger.info(f"Moved file '{file}' to {path} folder")
             sorted_files.append(file)
         except Exception as e:
-            logging.error(f"Error while moving file '{file}': {e}")
+            logger.error(f"Error while moving file '{file}': {e}")
 
 def folder_setup(folder_name):
     folder_path = os.path.join(current_dir, folder_name)
@@ -75,8 +75,8 @@ def main():
     for file in files:
         sort(file)
         
-    logging.info(f'Sorted files: {sorted_files}')
-    logging.info(f'Unsorted files: {unsorted_files}')
+    logger.info(f'Sorted files: {sorted_files}')
+    logger.info(f'Unsorted files: {unsorted_files}')
 
 if __name__ == '__main__':
     main()

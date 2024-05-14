@@ -44,3 +44,12 @@ def sort(file):
             pass
 
 # yea this should work
+
+
+
+# starts
+# checks for certain folders in the current working directory, if trueL do nothing else create them
+# feteches all the files in the directory and makes a list of it
+# if none ends
+# compares the ext of the files and sorts them acco to it
+# ends
