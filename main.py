@@ -5,6 +5,10 @@ from sys import exit
 import time
 current_dir = os.getcwd()
 
+logging.basicConfig(filename='actions.log', level=logging.DEBUG,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 folders = ['Documents', 'Audios', 'Videos', 'PDFs', 'Executables', 'Images', 'Archives', 'JARs']
 
 file_ext = {'.doc': 'Documents', '.docx': 'Documents', '.odt': 'Documents', '.txt': 'Documents', '.rtf': 'Documents', '.xls': 'Documents', '.xlsx': 'Documents', '.csv': 'Documents', '.ppt': 'Documents', '.pptx': 'Documents',
@@ -35,16 +39,17 @@ def sort(file):
         except Exception as e:
             logger.error(f"Error while moving file '{file}': {e}")
 
+
 def folder_setup(folder_name):
     folder_path = os.path.join(current_dir, folder_name)
     if os.path.exists(folder_path):
-        logging.info(f"{folder_name} folder already exists")
+        logger.info(f"{folder_name} folder already exists")
     else:
         try:
             os.mkdir(folder_path)
-            logging.info(f'{folder_name} folder created')
+            logger.info(f'{folder_name} folder created')
         except Exception as e:
-            logging.error(f'Failed to create folder {folder_name}: {e}')
+            logger.error(f'Failed to create folder {folder_name}: {e}')
 
 def get_files():
     current_dir_files = []
@@ -54,10 +59,6 @@ def get_files():
     return current_dir_files
 
 def main():
-    logging.basicConfig(filename='actions.log', level=logging.DEBUG,
-                        format='%(asctime)s - %(levelname)s - %(message)s')
-    logger = logging.getLogger(__name__)
-
     logger.info('SCRIPT STARTED')
     logger.info(f'Current working directory: {current_dir}')
 
